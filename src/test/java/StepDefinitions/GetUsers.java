@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GetUsers {
+
     private HttpResponse<String> httpResponse;
 
 
@@ -28,7 +29,7 @@ public class GetUsers {
         HttpRequest request = null;
         try {
             request = HttpRequest.newBuilder()
-                    .uri(new URI(url))
+                    .uri(new URI(ConfigReader.getBaseUrl() + url))
                     .GET()
                     .build();
         } catch (URISyntaxException e) {

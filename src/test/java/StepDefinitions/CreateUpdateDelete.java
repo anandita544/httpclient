@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import Reader.ConfigReader;
 import com.google.gson.JsonParser;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -33,7 +34,7 @@ public class CreateUpdateDelete {
         System.out.println("Request Body: " + requestBody);
 
         try {
-            request = HttpRequest.newBuilder().uri(new URI(url)).POST(HttpRequest.BodyPublishers.ofString(requestBody)).header("Content-Type", "application/json").build();
+            request = HttpRequest.newBuilder().uri(new URI(ConfigReader.getBaseUrl() + url)).POST(HttpRequest.BodyPublishers.ofString(requestBody)).header("Content-Type", "application/json").build();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -62,7 +63,7 @@ public class CreateUpdateDelete {
     @When("user hit the url of put api {string}")
     public void userHitTheUrlOfPutApi(String url) {
         try {
-            request = HttpRequest.newBuilder().uri(new URI(url)).PUT(HttpRequest.BodyPublishers.ofString(requestBody)).header("Content-Type","application/json").build();
+            request = HttpRequest.newBuilder().uri(new URI(ConfigReader.getBaseUrl() + url)).PUT(HttpRequest.BodyPublishers.ofString(requestBody)).header("Content-Type","application/json").build();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -78,7 +79,7 @@ public class CreateUpdateDelete {
     public void userHitTheUrlOfDeleteApi(String url) {
         HttpClient client=HttpClient.newHttpClient();
         try {
-            HttpRequest request= HttpRequest.newBuilder().uri(new URI(url)).DELETE().build();
+            HttpRequest request= HttpRequest.newBuilder().uri(new URI(ConfigReader.getBaseUrl() + url)).DELETE().build();
 
 
             try {
