@@ -19,6 +19,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class CreateUpdateDelete {
+    public String postRequestUrl = ConfigReader.getBaseUrl() + ConfigReader.getPostUrl();
+    public String putRequestUrl = ConfigReader.getBaseUrl() + ConfigReader.getPutUrl();
+    public String deleteRequestUrl=ConfigReader.getBaseUrl() + ConfigReader.getDeleteUrl();
+
+
+
     String requestBody;
     HttpRequest request= null;
     HttpResponse<String> response;
@@ -28,13 +34,13 @@ public class CreateUpdateDelete {
         this.requestBody = Body;
     }
 
-    @When("user hit the url of post api {string}")
-    public void userHitTheUrlOfPostApi(String url) throws URISyntaxException {
-        System.out.println("URL: " + url);
+    @When("user hit the url of post api")
+    public void userHitTheUrlOfPostApi() throws URISyntaxException {
+
         System.out.println("Request Body: " + requestBody);
 
         try {
-            request = HttpRequest.newBuilder().uri(new URI(ConfigReader.getBaseUrl() + url)).POST(HttpRequest.BodyPublishers.ofString(requestBody)).header("Content-Type", "application/json").build();
+            request = HttpRequest.newBuilder().uri(new URI(postRequestUrl)).POST(HttpRequest.BodyPublishers.ofString(requestBody)).header("Content-Type", "application/json").build();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -60,10 +66,10 @@ public class CreateUpdateDelete {
         assertTrue(response.body().contains("id"));
     }
 
-    @When("user hit the url of put api {string}")
-    public void userHitTheUrlOfPutApi(String url) {
+    @When("user hit the url of put api")
+    public void userHitTheUrlOfPutApi() {
         try {
-            request = HttpRequest.newBuilder().uri(new URI(ConfigReader.getBaseUrl() + url)).PUT(HttpRequest.BodyPublishers.ofString(requestBody)).header("Content-Type","application/json").build();
+            request = HttpRequest.newBuilder().uri(new URI(putRequestUrl)).PUT(HttpRequest.BodyPublishers.ofString(requestBody)).header("Content-Type","application/json").build();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -75,11 +81,11 @@ public class CreateUpdateDelete {
         }
     }
 
-    @When("user hit the url of delete api {string}")
-    public void userHitTheUrlOfDeleteApi(String url) {
+    @When("user hit the url of delete api")
+    public void userHitTheUrlOfDeleteApi() {
         HttpClient client=HttpClient.newHttpClient();
         try {
-            HttpRequest request= HttpRequest.newBuilder().uri(new URI(ConfigReader.getBaseUrl() + url)).DELETE().build();
+            HttpRequest request= HttpRequest.newBuilder().uri(new URI(deleteRequestUrl)).DELETE().build();
 
 
             try {

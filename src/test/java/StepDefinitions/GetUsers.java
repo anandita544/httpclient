@@ -13,6 +13,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GetUsers {
+    public String getRequestUrl = ConfigReader.getBaseUrl() + ConfigReader.getUrl();
+
 
     private HttpResponse<String> httpResponse;
     private int expectedStatusCode;
@@ -25,13 +27,14 @@ public class GetUsers {
         assertTrue(httpResponse.body() != null && !httpResponse.body().isEmpty());
     }
 
-    @Given("user send a GET request to {string}")
-    public void userSendAGETRequestTo(String url) {
+    @Given("user send a GET request")
+    public void userSendAGETRequestTo() {
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = null;
         try {
             request = HttpRequest.newBuilder()
-                    .uri(new URI(ConfigReader.getBaseUrl() + url))
+                    .uri(new URI(getRequestUrl))
                     .GET()
                     .build();
         } catch (URISyntaxException e) {

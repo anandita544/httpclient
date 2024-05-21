@@ -9,6 +9,19 @@ public class ConfigReader {
     public static String getBaseUrl() {
         return getProperty("config.properties", "base.url");
     }
+    public static String getPostUrl() {
+        return getProperty("config.properties", "post.url");
+    }
+    public static String getPutUrl() {
+        return getProperty("config.properties", "put.url");
+    }
+    public static String getDeleteUrl() {
+        return getProperty("config.properties", "delete.url");
+    }
+    public static String getUrl() {
+        return getProperty("config.properties", "get.url");
+    }
+
 
     public static int getValidStatusCode() {
         return Integer.parseInt(getProperty("testdata.properties", "valid.status.code"));
