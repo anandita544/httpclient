@@ -26,6 +26,12 @@ public class ConfigReader {
     public static int getValidStatusCode() {
         return Integer.parseInt(getProperty("testdata.properties", "valid.status.code"));
     }
+    public static int postStatusCode() {
+        return Integer.parseInt(getProperty("testdata.properties", "post.status.code"));
+    }
+    public static int deleteStatusCode() {
+        return Integer.parseInt(getProperty("testdata.properties", "delete.status.code"));
+    }
     public static String getRequestBody() {
         return getProperty("testdata.properties", "request.body");
     }

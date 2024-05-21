@@ -54,10 +54,10 @@ public String requestBody= String.valueOf(ConfigReader.getRequestBody());
         }
     }
 
-    @Then("user should receive a valid status code {}")
-    public void userShouldReceiveAValidStatusCode(int statusCode) {
+    @Then("user should receive a valid status code")
+    public void userShouldReceiveAValidStatusCode() {
         System.out.println(response.statusCode());
-        assertEquals(response.statusCode(), statusCode);
+        assertEquals(response.statusCode(), ConfigReader.postStatusCode());
     }
 
     @And("user should receive a valid responseBody")
@@ -103,5 +103,11 @@ public String requestBody= String.valueOf(ConfigReader.getRequestBody());
     @And("user get a response which contains {}")
     public void userGetAResponseWhichContainsUpdatedAt(String a) {
         assertTrue(response.body().contains(a));
+    }
+
+    @Then("user should receive a valid status code {int}")
+    public void userShouldReceiveAValidStatusCode(int statusCode) {
+        System.out.println(response.statusCode());
+        assertEquals(response.statusCode(),statusCode);
     }
 }
