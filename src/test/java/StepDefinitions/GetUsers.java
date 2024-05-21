@@ -15,11 +15,13 @@ import static org.junit.Assert.assertTrue;
 public class GetUsers {
 
     private HttpResponse<String> httpResponse;
+    private int expectedStatusCode;
 
 
-    @Then("user should receive a valid response {int}")
-    public void userShouldReceiveAValidResponse(int statusCode) {
-        assertEquals(httpResponse.statusCode(), statusCode);
+    @Then("user should receive a valid response")
+    public void userShouldReceiveAValidResponse() {
+
+        assertEquals(httpResponse.statusCode(), ConfigReader.getValidStatusCode());
         assertTrue(httpResponse.body() != null && !httpResponse.body().isEmpty());
     }
 
