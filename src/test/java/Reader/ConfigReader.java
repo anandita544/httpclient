@@ -26,6 +26,9 @@ public class ConfigReader {
     public static int getValidStatusCode() {
         return Integer.parseInt(getProperty("testdata.properties", "valid.status.code"));
     }
+    public static String getRequestBody() {
+        return getProperty("testdata.properties", "request.body");
+    }
 
     private static String getProperty(String fileName, String key) {
         Properties properties = new Properties();

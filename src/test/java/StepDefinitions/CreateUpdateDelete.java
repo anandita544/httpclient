@@ -22,22 +22,22 @@ public class CreateUpdateDelete {
     public String postRequestUrl = ConfigReader.getBaseUrl() + ConfigReader.getPostUrl();
     public String putRequestUrl = ConfigReader.getBaseUrl() + ConfigReader.getPutUrl();
     public String deleteRequestUrl=ConfigReader.getBaseUrl() + ConfigReader.getDeleteUrl();
+public String requestBody= String.valueOf(ConfigReader.getRequestBody());
 
 
 
-    String requestBody;
     HttpRequest request= null;
     HttpResponse<String> response;
     HttpClient client=HttpClient.newHttpClient();
-    @Given("^user sends a request body (.*)$")
-    public void userSendsARequestBody(String Body) {
-        this.requestBody = Body;
+    @Given("user sends a request body")
+    public void userSendsARequestBody() {
+        System.out.println("Request Body: " + requestBody);
     }
 
     @When("user hit the url of post api")
     public void userHitTheUrlOfPostApi() throws URISyntaxException {
 
-        System.out.println("Request Body: " + requestBody);
+
 
         try {
             request = HttpRequest.newBuilder().uri(new URI(postRequestUrl)).POST(HttpRequest.BodyPublishers.ofString(requestBody)).header("Content-Type", "application/json").build();
